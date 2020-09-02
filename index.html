@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <body>
+    <img id="image" />
+    <p id="text"></p>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.dev.js"></script>
+
+    <script>
+      const socket = io.connect('http://localhost:4000');
+      socket.on('image', image => {
+        const imageElm = document.getElementById('image');
+        imageElm.src = `data:image/jpeg;base64,${image}`;
+      });
+      socket.on('fire', data => {
+        console.log('11111111111', data)
+        const imageElm = document.getElementById('text');
+        imageElm.innerHTML = data.camera.name;
+      });
+    </script>
+  </body>
+</html>
